@@ -1,0 +1,31 @@
+.main{
+    margin-top:5%;
+    text-align: center;
+}
+
+.cell {
+    display: inline;
+}
+
+.siteCell{
+    margin: 0 100px 0 100px;
+}
+
+.scroll{
+    color: green;
+    font-size: 70px;
+}
+
+.scroll:hover{
+    cursor: pointer;
+    color: gray;
+}
+
+.siteWord{
+    font-size: 150px;
+}
+
+.siteWord:hover{
+	cursor: pointer;
+	color: blue;
+}
