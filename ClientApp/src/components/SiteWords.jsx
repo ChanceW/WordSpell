@@ -46,9 +46,9 @@ export class SiteWords extends React.Component {
         const currentWord = this.state.words[this.state.currentIndex];
         return (
             <div className="main">
-                <div className="cell"><span onClick={this.prevWord} className="scroll glyphicon glyphicon-circle-arrow-left"></span></div>
+                <div className="cell"><span onClick={this.prevWord} className="scroll glyphicon glyphicon-circle-arrow-left"/></div>
                 <div className="cell siteCell"><span className="siteWord" onClick={this.wordClick.bind(null, currentWord)}>{currentWord}</span></div>
-                <div className="cell"><span onClick={this.nextWord} className="scroll glyphicon glyphicon-circle-arrow-right"></span></div>
+                <div className="cell"><span onClick={this.nextWord} className="scroll glyphicon glyphicon-circle-arrow-right"/></div>
             </div>
         );
     } 

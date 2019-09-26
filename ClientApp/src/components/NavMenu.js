@@ -8,24 +8,29 @@ export class NavMenu extends Component {
   displayName = NavMenu.name
 
   render() {
-    return (
-      <Navbar inverse fixedTop fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to={'/'}>WordSpeller</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <LinkContainer to={'/'} exact>
-              <NavItem>
-                <Glyphicon glyph='education' /> Site Words
+      return (
+          <Navbar inverse fixedTop fluid collapseOnSelect>
+              <Navbar.Header>
+                  <Navbar.Brand>
+                      <Link to={'/'}>WordSpeller</Link>
+                  </Navbar.Brand>
+                  <Navbar.Toggle />
+              </Navbar.Header>
+              <Navbar.Collapse>
+                  <Nav>
+                      <LinkContainer to={'/'} exact>
+                          <NavItem>
+                              <Glyphicon glyph='education' /> Site Words
               </NavItem>
-            </LinkContainer>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    );
+                      </LinkContainer>
+                      <LinkContainer to={'/SiteWordGame'} exact>
+                          <NavItem>
+                              <Glyphicon glyph='glyphicon glyphicon-knight' /> Site Word Game
+              </NavItem>
+                      </LinkContainer>
+                  </Nav>
+              </Navbar.Collapse>
+          </Navbar>
+      );
   }
 }

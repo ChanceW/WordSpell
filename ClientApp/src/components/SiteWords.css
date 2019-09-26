@@ -22,10 +22,30 @@
 }
 
 .siteWord{
-    font-size: 150px;
+    font-size: 100px;
 }
 
 .siteWord:hover{
 	cursor: pointer;
 	color: blue;
+}
+
+.choice1 {
+    margin-right: 200px;
+}
+
+.checkIcon {
+    font-size: 50px;
+}
+
+.correct {
+    color: green;
+}
+
+.wrong {
+    color: red;
+}
+
+.choiceDiv {
+    margin-top:100px;
 }
