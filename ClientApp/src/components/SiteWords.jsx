@@ -1,23 +1,15 @@
 import React from 'react';
 import './SiteWords.css';
-
-const week1 = ["a", "and", "girl", "is", "name", "the", "am", "big", "i", "my", "school", "zero"];
-const week2 = ["than", "one", "red", "see", "apple", "bus", "like", "boy", "tree", "yellow", "we", "no"];
-const all = week1.concat(week2);
-
-function playAudio(word) {
-    document.getElementById('audioSrc').src = "audio/" + word + ".m4a";
-    var audio = document.getElementById('audio');
-    audio.load();
-    audio.play();
-}
+import AudioHelper from '../Utilities/AudioHelper';
+import MathHelper from '../Utilities/MathHelper';
 
 export class SiteWords extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { 
-            words: all,
-            currentIndex: 0
+            words: props.words,
+            currentIndex: 0,
+            prevIndex: 0
         };
         
         this.prevWord = this.prevWord.bind(this);
@@ -25,21 +17,25 @@ export class SiteWords extends React.Component {
     }
 
     prevWord(){
-        const prevIndex = this.state.currentIndex - 1;
+        const prevIndex = MathHelper.randomWordIndex(this.state.words.length, this.state.currentIndex);
+        const currentIndex = this.state.prevIndex;
         this.setState({
-            currentIndex : prevIndex < 0 ?  this.state.words.length -1 : prevIndex
+            currentIndex: currentIndex,
+            prevIndex: prevIndex
         });
     }
 
     nextWord(){
-        const nextIndex = this.state.currentIndex + 1;
+        const nextIndex = MathHelper.randomWordIndex(this.state.words.length, this.state.currentIndex);
+        const prevIndex = this.state.currentIndex;
         this.setState({
-            currentIndex : nextIndex >= this.state.words.length ? 0 : nextIndex
+            currentIndex: nextIndex,
+            prevIndex: prevIndex
         });
     }
 
     wordClick(word) {
-        playAudio(word);
+        AudioHelper.playAudio(word);
     }
 
     render(){

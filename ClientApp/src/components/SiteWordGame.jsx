@@ -2,44 +2,18 @@
 import './SiteWords.css';
 import badImg from '../Images/Dr_robotnik.png';
 import goodImg from '../Images/sonic.jpg';
-
-const week1 = ["a", "and", "girl", "is", "name", "the", "am", "big", "i", "my", "school", "zero"];
-const week2 = ["than", "one", "red", "see", "apple", "bus", "like", "boy", "tree", "yellow", "we", "no"];
-const all = week1.concat(week2);
-
-function playAudio(word) {
-    document.getElementById('audioSrc').src = "audio/" + word + ".m4a";
-    var audio = document.getElementById('audio');
-    audio.load();
-    audio.play();
-    return false;
-}
-
-function randomWordIndex(max, blockedIndex) {
-    let result = Math.floor(Math.random() * max);
-    while (result === blockedIndex) {
-        result = Math.floor(Math.random() * max);
-    }
-    return result;
-}
-
-function shuffle(word1, word2) {
-    const d = new Date();
-    const n = d.getSeconds();
-    const swap = n % 2 === 0;
-
-    return swap ? { choice1: word2, choice2: word1 } : { choice1: word1, choice2: word2 };
-}
+import AudioHelper from '../Utilities/AudioHelper';
+import MathHelper from '../Utilities/MathHelper';
 
 export class SiteWordGame extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
-        const currentIndex = randomWordIndex(all.length, "");
-        const randomIndex = randomWordIndex(all.length, currentIndex);
-        const choices = shuffle(all[currentIndex], all[randomIndex]);
+        const currentIndex = MathHelper.randomWordIndex(props.words.length, "");
+        const randomIndex = MathHelper.randomWordIndex(props.words.length, currentIndex);
+        const choices = MathHelper.shuffle(props.words[currentIndex], props.words[randomIndex]);
         this.state = {
-            words: all,
+            words: props.words,
             currentIndex: currentIndex,
             randomIndex: randomIndex,
             choice1: choices.choice1,
@@ -51,9 +25,9 @@ export class SiteWordGame extends React.Component {
     }
 
     prevWord() {
-        const currentIndex = randomWordIndex(all.length, "");
-        const randomIndex = randomWordIndex(all.length, currentIndex);
-        const choices = shuffle(all[currentIndex], all[randomIndex]);
+        const currentIndex = MathHelper.randomWordIndex(this.state.words.length, "");
+        const randomIndex = MathHelper.randomWordIndex(this.state.words.length, currentIndex);
+        const choices = MathHelper.shuffle(this.state.words[currentIndex], this.state.words[randomIndex]);
         this.setState({
             currentIndex: currentIndex,
             randomIndex: randomIndex,
@@ -64,9 +38,9 @@ export class SiteWordGame extends React.Component {
     }
 
     nextWord() {
-        const currentIndex = randomWordIndex(all.length, "");
-        const randomIndex = randomWordIndex(all.length, currentIndex);
-        const choices = shuffle(all[currentIndex], all[randomIndex]);
+        const currentIndex = MathHelper.randomWordIndex(this.state.words.length, "");
+        const randomIndex = MathHelper.randomWordIndex(this.state.words.length, currentIndex);
+        const choices = MathHelper.shuffle(this.state.words[currentIndex], this.state.words[randomIndex]);
         this.setState({
             currentIndex: currentIndex,
             randomIndex: randomIndex,
@@ -77,14 +51,14 @@ export class SiteWordGame extends React.Component {
     }
 
     wordClick(word) {
-        playAudio(word);
+        AudioHelper.playAudio(word);
         return;
     }
 
     chooseWord(word) {
         const currentWord = this.state.words[this.state.currentIndex];
         const isCorrect = currentWord === word;
-        playAudio(isCorrect ? "sonic_alright" : "sonic_terrible");
+        AudioHelper.playAudio(isCorrect ? "sonic_alright" : "sonic_terrible");
         this.setState({
             isCorrect: isCorrect,
             showCheck: true
