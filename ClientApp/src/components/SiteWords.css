@@ -35,7 +35,7 @@
 }
 
 .checkIcon {
-    font-size: 50px;
+    width: 150px;
 }
 
 .correct {
@@ -47,5 +47,5 @@
 }
 
 .choiceDiv {
-    margin-top:100px;
+    margin-top:50px;
 }

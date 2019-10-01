@@ -1,5 +1,7 @@
 ﻿import React from 'react';
 import './SiteWords.css';
+import badImg from '../Images/Dr_robotnik.png';
+import goodImg from '../Images/sonic.jpg';
 
 const week1 = ["a", "and", "girl", "is", "name", "the", "am", "big", "i", "my", "school", "zero"];
 const week2 = ["than", "one", "red", "see", "apple", "bus", "like", "boy", "tree", "yellow", "we", "no"];
@@ -81,16 +83,18 @@ export class SiteWordGame extends React.Component {
 
     chooseWord(word) {
         const currentWord = this.state.words[this.state.currentIndex];
+        const isCorrect = currentWord === word;
+        playAudio(isCorrect ? "sonic_alright" : "sonic_terrible");
         this.setState({
-            isCorrect: currentWord === word,
+            isCorrect: isCorrect,
             showCheck: true
         });
     }
 
     getCheckIcon() {
         if (this.state.showCheck) {
-            return this.state.isCorrect ? <div><span className="checkIcon correct glyphicon glyphicon-thumbs-up" /></div>
-                : <div><span className="checkIcon wrong glyphicon glyphicon-thumbs-down" /></div>;
+            return this.state.isCorrect ? <div><img className="checkIcon" src={goodImg} alt="Incorrect" /></div>
+                : <div><img className="checkIcon" src={badImg} alt="correct" /></div>;
         }
         return null;
     }
@@ -106,9 +110,9 @@ export class SiteWordGame extends React.Component {
                 <div className="cell siteCell"><span className="siteWord glyphicon glyphicon-volume-up" onClick={this.wordClick.bind(null, currentWord)}/></div>
                 <div className="cell"><span onClick={this.nextWord} className="scroll glyphicon glyphicon-circle-arrow-right"/></div>
                 <div className="choiceDiv">
-                    {this.getCheckIcon()}
                     <span onClick={this.chooseWord.bind(null, choice1)} className="choice1 siteWord">{choice1}</span>
                     <span onClick={this.chooseWord.bind(null, choice2)} className="choice2 siteWord">{choice2}</span>
+                    {this.getCheckIcon()}
                 </div> 
             </div>
         );
