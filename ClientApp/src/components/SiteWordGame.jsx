@@ -1,9 +1,35 @@
 ﻿import React from 'react';
 import './SiteWords.css';
-import badImg from '../Images/Dr_robotnik.png';
-import goodImg from '../Images/sonic.jpg';
 import AudioHelper from '../Utilities/AudioHelper';
 import MathHelper from '../Utilities/MathHelper';
+
+import sonicGood from '../Images/sonic_good.png';
+import sonicBad from '../Images/sonic_bad.png';
+import marioGood from '../Images/mario_good.png';
+import marioBad from '../Images/mario_bad.jpg';
+import pikaGood from '../Images/pika_good.png';
+import pikaBad from '../Images/pika_bad.png';
+
+const goodImages = [
+    { img: sonicGood, key: "sonic" },
+    { img: marioGood, key: "mario" },
+    { img: pikaGood, key: "pika" }
+];
+const badImages = [
+    { img: sonicBad, key: "sonic" },
+    { img: marioBad, key: "mario" },
+    { img: pikaBad, key: "pika" }
+];
+const goodAudio = [
+    { audio: "Game/Sonic/alright", key: "sonic" }, { audio: "Game/Sonic/incred", key: "sonic" },
+    { audio: "Game/Mario/hehe", key: "mario" }, { audio: "Game/Mario/eureka", key: "mario" },
+    { audio: "Game/Pika/happy", key: "pika" }, { audio: "Game/Pika/happy2", key: "pika" }
+];
+const badAudio = [
+    { audio: "Game/Sonic/no-2", key: "sonic" }, { audio: "Game/Sonic/terr", key: "sonic" },
+    { audio: "Game/Mario/mammamia", key: "mario" }, { audio: "Game/Mario/ohno", key: "mario" },
+    { audio: "Game/Pika/angry", key: "pika" }, { audio: "Game/Pika/angry2", key: "pika" }
+];
 
 export class SiteWordGame extends React.Component {
     constructor(props) {
@@ -58,7 +84,6 @@ export class SiteWordGame extends React.Component {
     chooseWord(word) {
         const currentWord = this.state.words[this.state.currentIndex];
         const isCorrect = currentWord === word;
-        AudioHelper.playAudio(isCorrect ? "sonic_alright" : "sonic_terrible");
         this.setState({
             isCorrect: isCorrect,
             showCheck: true
@@ -67,8 +92,22 @@ export class SiteWordGame extends React.Component {
 
     getCheckIcon() {
         if (this.state.showCheck) {
-            return this.state.isCorrect ? <div><img className="checkIcon" src={goodImg} alt="Incorrect" /></div>
-                : <div><img className="checkIcon" src={badImg} alt="correct" /></div>;
+            if (this.state.isCorrect) {
+                const media = goodImages[MathHelper.randomWordIndex(goodImages.length, "")];
+                const audio = goodAudio.filter((a) => {
+                    return a.key === media.key;
+                });
+                AudioHelper.playAudio(audio[MathHelper.randomWordIndex(audio.length, "")].audio);
+                return <div><img className="checkIcon" src={media.img} alt="correct" /></div>;
+            }
+            else {
+                const media = badImages[MathHelper.randomWordIndex(badImages.length, "")];
+                const audio = badAudio.filter((a) => {
+                    return a.key === media.key;
+                });
+                AudioHelper.playAudio(audio[MathHelper.randomWordIndex(audio.length, "")].audio);
+                return <div><img className="checkIcon" src={media.img} alt="Incorrect" /></div>;
+            }
         }
         return null;
     }
