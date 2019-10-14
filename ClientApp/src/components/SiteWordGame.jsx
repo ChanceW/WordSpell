@@ -1,35 +1,9 @@
-﻿import React from 'react';
+﻿
+import React from 'react';
 import './SiteWords.css';
 import AudioHelper from '../Utilities/AudioHelper';
 import MathHelper from '../Utilities/MathHelper';
-
-import sonicGood from '../Images/sonic_good.png';
-import sonicBad from '../Images/sonic_bad.png';
-import marioGood from '../Images/mario_good.png';
-import marioBad from '../Images/mario_bad.jpg';
-import pikaGood from '../Images/pika_good.png';
-import pikaBad from '../Images/pika_bad.png';
-
-const goodImages = [
-    { img: sonicGood, key: "sonic" },
-    { img: marioGood, key: "mario" },
-    { img: pikaGood, key: "pika" }
-];
-const badImages = [
-    { img: sonicBad, key: "sonic" },
-    { img: marioBad, key: "mario" },
-    { img: pikaBad, key: "pika" }
-];
-const goodAudio = [
-    { audio: "Game/Sonic/alright", key: "sonic" }, { audio: "Game/Sonic/incred", key: "sonic" },
-    { audio: "Game/Mario/hehe", key: "mario" }, { audio: "Game/Mario/eureka", key: "mario" },
-    { audio: "Game/Pika/happy", key: "pika" }, { audio: "Game/Pika/happy2", key: "pika" }
-];
-const badAudio = [
-    { audio: "Game/Sonic/no-2", key: "sonic" }, { audio: "Game/Sonic/terr", key: "sonic" },
-    { audio: "Game/Mario/mammamia", key: "mario" }, { audio: "Game/Mario/ohno", key: "mario" },
-    { audio: "Game/Pika/angry", key: "pika" }, { audio: "Game/Pika/angry2", key: "pika" }
-];
+import GameMedia from './GameMedia';
 
 export class SiteWordGame extends React.Component {
     constructor(props) {
@@ -93,16 +67,16 @@ export class SiteWordGame extends React.Component {
     getCheckIcon() {
         if (this.state.showCheck) {
             if (this.state.isCorrect) {
-                const media = goodImages[MathHelper.randomWordIndex(goodImages.length, "")];
-                const audio = goodAudio.filter((a) => {
+                const media = GameMedia.goodImages[MathHelper.randomWordIndex(GameMedia.goodImages.length, "")];
+                const audio = GameMedia.goodAudio.filter((a) => {
                     return a.key === media.key;
                 });
                 AudioHelper.playAudio(audio[MathHelper.randomWordIndex(audio.length, "")].audio);
                 return <div><img className="checkIcon" src={media.img} alt="correct" /></div>;
             }
             else {
-                const media = badImages[MathHelper.randomWordIndex(badImages.length, "")];
-                const audio = badAudio.filter((a) => {
+                const media = GameMedia.badImages[MathHelper.randomWordIndex(GameMedia.badImages.length, "")];
+                const audio = GameMedia.badAudio.filter((a) => {
                     return a.key === media.key;
                 });
                 AudioHelper.playAudio(audio[MathHelper.randomWordIndex(audio.length, "")].audio);

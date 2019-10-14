@@ -14,4 +14,8 @@
 
         return swap ? { choice1: word2, choice2: word1 } : { choice1: word1, choice2: word2 };
     }
+
+    static shuffleArray(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
 }
