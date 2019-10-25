@@ -4,5 +4,6 @@
         var audio = document.getElementById('audio');
         audio.load();
         audio.play();
+        return false;
     }
 }

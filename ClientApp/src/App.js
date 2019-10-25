@@ -3,6 +3,7 @@ import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import SiteWords from './components/SiteWords';
 import { SiteWordGame } from './components/SiteWordGame';
+import NumberBoard from './components/NumberBoard';
 import WordList from "./SiteWords";
 import MathHelper from './Utilities/MathHelper';
 
@@ -19,6 +20,7 @@ export default class App extends Component {
         <Layout>
             <Route exact path='/' component={() => <SiteWords words={this.state.words} />} />
             <Route exact path='/SiteWordGame' component={() => <SiteWordGame words={this.state.words} />} />
+            <Route exact path='/NumberBoard' component={() => <NumberBoard />} />
         </Layout>
     );
   }

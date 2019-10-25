@@ -49,3 +49,16 @@
 .choiceDiv {
     margin-top:50px;
 }
+
+.red {
+    color:red;
+}
+
+.green {
+    color: green;
+}
+
+.correctCount{
+    font-size:70px;
+    font-weight:bold;
+}

@@ -28,6 +28,11 @@ export class NavMenu extends Component {
                               <Glyphicon glyph='glyphicon glyphicon-knight' /> Site Word Game
               </NavItem>
                       </LinkContainer>
+                      <LinkContainer to={'/NumberBoard'} exact>
+                          <NavItem>
+                              <Glyphicon glyph='glyphicon glyphicon-calendar' /> NumberBoard
+              </NavItem>
+                      </LinkContainer>
                   </Nav>
               </Navbar.Collapse>
           </Navbar>

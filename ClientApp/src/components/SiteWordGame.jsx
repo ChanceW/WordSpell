@@ -17,7 +17,10 @@ export class SiteWordGame extends React.Component {
             currentIndex: currentIndex,
             randomIndex: randomIndex,
             choice1: choices.choice1,
-            choice2: choices.choice2        };
+            choice2: choices.choice2,
+            correct: 0,
+            checked: false
+        };
 
         this.prevWord = this.prevWord.bind(this);
         this.nextWord = this.nextWord.bind(this);
@@ -46,21 +49,29 @@ export class SiteWordGame extends React.Component {
             randomIndex: randomIndex,
             choice1: choices.choice1,
             choice2: choices.choice2,
-            showCheck: false
+            showCheck: false,
+            checked: false
         });
     }
 
     wordClick(word) {
         AudioHelper.playAudio(word);
-        return;
+        return false;
     }
 
     chooseWord(word) {
+        if (this.state.checked) {
+            this.nextWord();
+            return;
+        }
         const currentWord = this.state.words[this.state.currentIndex];
         const isCorrect = currentWord === word;
+        const correctCount = isCorrect ? this.state.correct + 1 : 0;
         this.setState({
             isCorrect: isCorrect,
-            showCheck: true
+            showCheck: true,
+            correct: correctCount,
+            checked: true
         });
     }
 
@@ -95,7 +106,8 @@ export class SiteWordGame extends React.Component {
             <div className='main'>
                 <div className="cell"><span onClick={this.prevWord} className="scroll glyphicon glyphicon-circle-arrow-left" /></div>
                 <div className="cell siteCell"><span className="siteWord glyphicon glyphicon-volume-up" onClick={this.wordClick.bind(null, currentWord)}/></div>
-                <div className="cell"><span onClick={this.nextWord} className="scroll glyphicon glyphicon-circle-arrow-right"/></div>
+                <div className="cell"><span onClick={this.nextWord} className="scroll glyphicon glyphicon-circle-arrow-right" /></div>
+                <div className={this.state.correct ? "green correctCount" : "red correctCount"}>{this.state.correct}</div>
                 <div className="choiceDiv">
                     <span onClick={this.chooseWord.bind(null, choice1)} className="choice1 siteWord">{choice1}</span>
                     <span onClick={this.chooseWord.bind(null, choice2)} className="choice2 siteWord">{choice2}</span>

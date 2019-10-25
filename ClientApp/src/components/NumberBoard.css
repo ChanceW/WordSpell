@@ -1,0 +1,47 @@
+﻿body {
+}
+.boardCell {
+    border: 1px solid black;
+    width: 80px;
+    height: 80px;
+    display: inline-block
+}
+
+.boardCell .glyphicon {
+    vertical-align: middle;
+    margin-top: 23px;
+    font-size: 25px;
+}
+
+.table.correct .noItem {
+    color: red;
+}
+
+.numBoard .navi span:nth-of-type(1) {
+    margin-left: 25px;
+}
+
+.guess {
+    text-align:center
+}
+
+.guess.green{
+    border: 1px solid green;
+}
+
+.guess.red{
+    border: 1px solid red;
+}
+
+.noItem {
+    color: white;
+}
+
+.quest {
+    margin-bottom: 25px;
+    font-size: 40px;
+}
+
+.quest input{
+    width: 50px;
+}
