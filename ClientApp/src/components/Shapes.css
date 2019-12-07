@@ -1,0 +1,5 @@
+﻿.shapeContainer {
+    white-space: nowrap;
+    display: inline-grid;
+    vertical-align: middle;
+}

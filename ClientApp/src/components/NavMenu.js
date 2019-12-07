@@ -33,6 +33,11 @@ export class NavMenu extends Component {
                               <Glyphicon glyph='glyphicon glyphicon-calendar' /> NumberBoard
               </NavItem>
                       </LinkContainer>
+                      <LinkContainer to={'/Shapes'} exact>
+                          <NavItem>
+                              <Glyphicon glyph='glyphicon glyphicon-object-align-right' /> Shapes
+              </NavItem>
+                      </LinkContainer>
                   </Nav>
               </Navbar.Collapse>
           </Navbar>
